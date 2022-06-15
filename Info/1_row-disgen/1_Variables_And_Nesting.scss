@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$primary-color: #f9ed69; //this is how to define  a variable in SCSS
+$color-secondary: orange;
+$color-tertiary: pink;
+$widthButton: 150px;
+nav {
+  margin: 30px;
+  background-color: $primary-color;
+
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+.navigation {
+  list-style: none;
+  float: left;
+
+  li {
+    // this is nesting in SCSS . rather then doing .navigation li {} in css . so its very clear that
+    // you are here try to modify the li inside this .navigation class
+    display: inline-block;
+    margin-left: 30px;
+
+    &:first-child {
+      // how to nest more deeply inside the SCSS using the & symbol in order to prevent
+      //  the repetition (without & => .navigation li  :first-child  with & =>
+      // .navigation li:first-child  , the  idea here ↑ that & removed the white space )
+      margin: 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: $color-secondary;
+  }
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main:link,
+.btn-hot:link {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: $widthButton;
+}
+
+.btn-main {
+  &:link {
+    background-color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: darken($color-secondary, 20%);
+    // darken is a built-in function in SCSS , second arg is to make this color darker
+    // there is also lighten function
+  }
+}
+
+.btn-hot {
+  &:link {
+    background-color: $color-tertiary;
+  }
+
+  &:hover {
+    background-color: darken($color-tertiary, 20%);
+    // darken is a built-in function in SCSS , second arg is to make this color darker
+    // there is also lighten function
+  }
+}
+
+// video {
+//     content: "";
+//     clear: both;
+//     display: table;
+//     // this is here how to fix the float problem in container , or by nesting solution
+// }

@@ -1,0 +1,116 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+$primary-color: #f9ed69;
+$color-secondary: orange;
+$color-tertiary: pink;
+$color-text-dark: black;
+$color-text-light: white;
+$widthButton: 150px;
+
+@mixin clearfix {
+  //this is here like a reusable function
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin style-link-text($color) {
+  // this here to pass an argument
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $color;
+}
+
+@function multiply($a, $b) {
+  @return $a * $b;
+}
+// this is here how to make your own function in scss
+
+nav {
+  margin: multiply(3, 15) * 1px; //this would give us 45px ,
+  background-color: $primary-color;
+
+  @include clearfix; //this how to recall it
+}
+
+.navigation {
+  list-style: none;
+  float: left;
+
+  li {
+    display: inline-block;
+    margin-left: 30px;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  a:link {
+    color: $color-secondary;
+    @include style-link-text($color-text-dark);
+  }
+}
+
+.buttons {
+  float: right;
+}
+
+%btn-placeholder {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  width: $widthButton;
+  @include style-link-text($color-text-light);
+}
+
+// just use extends when the selectors or the elements that you are extending
+// are actually pretty related to each other .
+
+.btn-main {
+  &:link {
+    @extend %btn-placeholder; //we extended or recalled this huge btn-placeholder here
+
+    background-color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: darken($color-secondary, 20%);
+  }
+}
+
+.btn-hot {
+  &:link {
+    @extend %btn-placeholder;
+    background-color: $color-tertiary;
+  }
+
+  &:hover {
+    background-color: darken($color-tertiary, 20%);
+  }
+}
+
+// in package.json : node-sass sass/main.scss css/style.css -w  , -w is for watching changes
+// to run this file use  npm run compile:sass
+
+// partial files like _base.scss should always begin with underscore _
+
+.text {
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  -webkit-background-clip: text;
+  color: transparent; //those to the background gets clipped exactly where the text is,
+  // what happens if we do not do this transparent ? Then what happens is that you see the text
+  // which sits on top of the clipped background, and so we want to make this text invisible, so transparent,
+}

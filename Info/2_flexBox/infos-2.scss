@@ -1,0 +1,41 @@
+:root {
+    --color-primary: #eb2f64;
+    // :root like the same thing as the HTML selector By putting all of our variables in here,
+    // they will be accessible throughout the entire document, -- is to distinguish between those
+    // here which are called custom properties and the normal ones (that built in )
+}
+
+.something {
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+    min-height: 100vh;
+    fill: var(--color-grey-dark-3); //for change the color of svg
+    fill: currentColor; //current color basically is just the color of the current element or the parent element.
+
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0.01, 0, 1) 0.2s, background-color 0.1s;
+    //here transform happens first  and then width with delayed of .2s
+
+    .paragraph:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+
+    box-sizing: content-box; // this is the default of box-sizing
+}
+
+.animation {
+    animation: pulsate 1s infinite;
+}
+
+.mask {
+    background-color: var(--color-primary);
+    -webkit-mask-image: url(../img/chevron-thin-right.svg);
+    -webkit-mask-size: cover;
+}
+
+.something2 {
+    &::before {
+        content: "\201C"; //this is like an HTML entity but using the code that is for CSS
+    }
+}
+
+// transition doesn't work  for background images

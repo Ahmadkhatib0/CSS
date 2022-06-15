@@ -1,0 +1,63 @@
+.container {
+    width: 1000px;
+    margin: 30px auto;
+    background-color: #ddd;
+
+    display: grid;
+    //grid-template-rows: repeat(2, 150px);
+    //grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+
+    grid-auto-rows: 5rem; //this to style the height of the implicit cells 
+
+    grid-auto-flow: column; //this here to change the behavior to make the remaining boxes 
+    // (implicit ones ) to be added as columns , the default is to be as rows
+
+    grid-auto-flow: row dense;
+    //dense its mean to make the container  in harmony with no holes or empty boxes
+    // so for example if there is a lonely box in the footer and beside it there is an empty box , the
+    // lonely box will stretch to fill the empty area
+
+    grid-auto-columns: 0.5fr; // this here is to make the implicit boxes half fraction of the explicit 
+    // ones , and this appalled only if you set the grid-auto-flow: column;
+
+    // Align grid items to grid areas
+    //align-items: center; // STRETCH / center / end / start    ///vertically
+    //justify-items: center;                                    //////horizontally
+
+    // Align grid tracks to grid container
+    // these four boxes are called explicit , and the other four  are  called implicit
+    grid-template-rows: repeat(2, 100px);
+    grid-template-columns: repeat(2, 200px);
+    height: 1000px;
+
+    // these here are for align the whole content inside the container
+    justify-content: center; // center / start / end / space-between / space-around / space-evenly
+    //the justify  part of the name always means the horizontal direction, or the rows  axis,
+    align-content: center; //the align part of the name always means the vertical direction, or the column axis,
+
+    .item {
+        padding: 10px;
+        color: white;
+        font-family: sans-serif;
+        font-size: 30px;
+        background-color: orangered;
+
+        &--4 {
+            background-color: crimson;
+            grid-row: 2 / span 3;
+            //align-self: start;   ///vertically
+            //justify-self: start;  ///horizontally
+        }
+
+        &--6 {
+            background-color: lightcoral;
+            grid-row: 2 / span 2;
+        }
+
+        &--7 {
+            background-color: palevioletred;
+            grid-column: 1 / -1;
+        }
+    }
+}

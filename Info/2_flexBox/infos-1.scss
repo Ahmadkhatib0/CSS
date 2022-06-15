@@ -1,0 +1,170 @@
+.pseudo-classes {
+  *,
+  *::after,
+  *::before {
+  }
+
+  &:first-child {
+  }
+
+  &::after {
+  }
+
+  &:link,
+  &:visited {
+  }
+
+  &:hover {
+  }
+
+  &:active {
+  }
+
+  & > * {
+  }
+
+  &:target {
+  }
+
+  &:not(:last-child) {
+  }
+
+  &__input:focus {
+    outline: none;
+  }
+
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4rem);
+  }
+
+  &:focus:invalid {
+    border-bottom: 3px solid $color-secondary-dark;
+  }
+
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.9); //photo which is not hovered.
+  }
+
+  &:hover &__side {
+    transform: rotateY(180deg); //when hover rotate side
+  }
+
+  &::-webkit-input-placeholder {
+    color: $color-grey-dark-2;
+  }
+
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}
+
+.button {
+  &,
+  //this for apply the under styles to btn because buttons haven't links as anchor tag element 
+  &:link,
+  &:visited {
+  }
+}
+
+@function multiply($a, $b) {
+  @return $a * $b;
+}
+
+@mixin style-link-text($color) {
+  margin: multiply(3, 15) * 1px;
+}
+
+@include multiply(3, 3);
+
+%btn-placeholder {
+}
+
+@extend %btn-placeholder;
+
+.something {
+  background-color: darken($color-tertiary, 20%);
+  -webkit-background-clip: text; //for evacuation the bgColor inside the text
+  color: transparent;
+  backface-visibility: hidden; //for back-side of the card or removing shaking
+  transition: all 0.4s;
+  transform: skewY(2deg) skewX(15deg) scale(1.1);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  perspective: 150rem; //for the 3d , and 150 best value that work
+  background-blend-mode: darken; //this like modes for implement the photo
+  overflow: hidden;
+  box-decoration-break: clone;
+  shape-outside: circle();
+
+  filter: blur(3px) brightness(80%);
+  object-fit: cover; // this is for video cover
+  border-bottom: 3px solid transparent; //prevent extending in size if you've solid border applied
+}
+
+.something2 {
+  background-image: linear-gradient(105deg, rgba($color-white, 0.9) 0%, rgba($color-white, 0.9) 50%, transparent 50%),
+    url(../img/nat-10.jpg);
+
+  cursor: pointer;
+
+  background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+  background-size: 220%; //increase or decrease to show the effect
+  background-position: 100%;
+  transform-origin: left; //default value is to or in the center
+  display: table; //should be on the main section or dev
+  display: table-cell; //should be on the targeted  devS
+  vertical-align: middle;
+
+  column-count: 2;
+  column-gap: 4rem;
+  column-rule: 1px solid $color-grey-light-2;
+  hyphens: auto;
+}
+
+.something3 {
+  backdrop-filter: blur(10px);
+
+  @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.3);
+    // we asking the browser if those properties supported , if they supported to apply them
+    // so We just implemented graceful degradation using the @support rule.
+  }
+
+  ::selection {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+[class^="col-"] {
+}
+
+@media (min-resolution: 192dpi) {
+  // 192dpi that's the resolution of the Apple retina screen. And so that's a high resolution
+  //screen, that's usually used as a reference here
+  /// So whenever the resolution is higher than 192 dots per inch, the code that is
+  // in here, will be applied.
+}
+@media (min-resolution: 192dpi) and (min-width: 37.5em) {
+  // the and keyword is to extend the media or to add another condition to be applied
+}
+@media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+  // the comma here is mean  (or )
+}
+
+@media (min-resolution: 192dpi) and (min-width: 37.5em),
+  (-webkit-min-device-ration: 2) and (min-width: 37.5em),
+  (min-width: 125em) {
+  // the second value is for make sure that this will gonna work in safari , ratio 2 is 2x
+}
+
+@media only screen and (max-width: 37.5em) {
+  @content; // only works for example if someone tries to print out our page, then these
+  // media queries don't apply,  so they only apply to screens.
+}
+
+@media only screen and (max-width: 56.25em), only screen and (hover: none) {
+}

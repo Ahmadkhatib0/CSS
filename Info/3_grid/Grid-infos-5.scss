@@ -1,0 +1,65 @@
+.grid {
+    grid-template-columns: 8rem 1fr repeat(8, minmax(min-content, 14rem)) 1fr;
+    // some benefits here that  1fr on the both sides will break as we shrink.this great because they are empty
+
+    grid-row: 1 / -1; //from above right away till the end or the footer
+
+    grid-row: 1 / span 2; //we didn't add -1 because its for the explicit content,
+    // so here we didn't have explicit row above (grid-template-rows) so it won't work if added
+
+    align-items: start;
+    //to make the boxes start from the same hight, so they'll be in harmony regardless on the different amount of text
+
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); //this will make columns responsive
+
+    //these here to center one direction content , and the last to prevent button to stretch till the end
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 6rem 8vw; //left and right will be adapted to the viewport
+
+    // this here is about to create one color filleter on the background-image
+    background-image: linear-gradient(rgba($color-primary, 0.5), rgba($color-primary, 0.5)), url(../img/back.jpg);
+
+    justify-self: center; //row axis
+    align-self: end; //column axis
+
+    transform: translateY(50%); //its 50% of the height of the item itself
+}
+
+.img {
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // the tree prop are required to prevent  the images from overlapping the grid cells
+        display: block; //this here to prevent the wired white line
+    }
+}
+
+.something {
+    grid-gap: 2rem; //grid gap its great because it doesn't add margin right to the last element
+
+    grid-template-columns: max-content;
+    //this to make the columns has the size to fit the content without breaking any line
+}
+
+.text {
+    //we can to treat the  text and the pseudo elements as grid  (look at __header seenon-text)
+
+    grid-row-gap: 5vh; //this will be adapted to the viewport height so if we have very tall viewport
+    // it won't be so empty as if we had sat it to faxed value , and it won't be also so narrow if we
+    // have very short viewport height
+}
+
+.grid2 {
+    grid-template-columns: minmax(min-content, max-content); //columns should never be narrower then content(i,e text)
+    grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+    grid-template-rows: 6rem calc(100vh - 6rem) min-content min-content 40vw repeat(3, min-content);
+    grid-template-columns: repeat(3, min-content max-content);
+}
+
+// what gets ignored by CSS Grid and Flexbox, are floats, display, inline-block, display:table-cell,
+// and vertical-align altogether,
